@@ -1,0 +1,7 @@
+# Source of truth for vendor/sync.sh. Edit this file, then rerun vendor/sync.sh.
+# `vendor/sync.sh --update` rewrites the commit line.
+# No license line. Each skill ships its own LICENSE, and the sync copies it with the skill.
+repo https://github.com/benjitaylor/skills.git
+commit 299140fafd08df55a9c234e610c3f64af3f45531
+path .
+skill stageshow
