@@ -1,0 +1,21 @@
+# Source of truth for vendor/emilkowalski-skills/sync.sh. Edit this file, then rerun sync.sh.
+# `sync.sh --update` rewrites the commit line.
+repo https://github.com/emilkowalski/skills.git
+commit 64eb3deb9a5fbfa041faf783e0bc3fd635872e9c
+skill animate
+skill animate-expo
+skill animation-performance
+skill animation-vocabulary
+skill apple-design
+skill break-ui
+skill choreograph
+skill emil-design-eng
+skill find-animation-opportunities
+skill gestures
+skill improve-animations
+skill learn-taste
+skill mobile-native
+skill pick-ui-library
+skill prototype
+skill remove-animations
+skill review-animations
