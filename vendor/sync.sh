@@ -34,7 +34,7 @@ parse_manifest() {
   manifest=$1
   id=$(basename "$(dirname "$manifest")")
   repo="" commit="" path="" license="" names=()
-  while read -r key value extra; do
+  while read -r key value extra || [ -n "$key" ]; do
     case "$key" in
       ""|"#"*) ;;
       repo|commit|path|license) set_once "$key" "$value" ;;
