@@ -54,6 +54,17 @@ for name in "${names[@]}"; do
   rsync -a --delete "$up/skills/$name/" "$root/skills/$name/"
 done
 
+for name in "${names[@]}"; do
+  file=$root/skills/$name/SKILL.md
+  awk '
+    NR == 1 && $0 == "---" { infm = 1; print; next }
+    infm && /^disable-model-invocation:/ { print "disable-model-invocation: true"; seen = 1; next }
+    infm && $0 == "---" { if (!seen) print "disable-model-invocation: true"; infm = 0 }
+    { print }
+  ' "$file" > "$tmp/SKILL.md"
+  mv "$tmp/SKILL.md" "$file"
+done
+
 echo "copying LICENSE"
 cp "$up/LICENSE" "$here/LICENSE"
 
@@ -86,6 +97,14 @@ check() {
         fail=1
       done < <(grep -rnoF --include='*.md' -e "\`$name\`" -e "\`/$name\`" "$root/skills/$vendored" || true)
     done
+  done
+
+  for name in "${names[@]}"; do
+    awk 'NR == 1 && $0 == "---" { infm = 1; next } infm && $0 == "---" { exit } infm' "$root/skills/$name/SKILL.md" |
+      grep -qxF 'disable-model-invocation: true' || {
+        echo "model-invocable: skills/$name/SKILL.md lacks disable-model-invocation: true"
+        fail=1
+      }
   done
 
   [ "$fail" = 0 ] || return 1
