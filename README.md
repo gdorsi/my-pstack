@@ -3,7 +3,7 @@
 
 # my-pstack
 
-[pstack](https://github.com/backnotprop/pstack) with this fork's edits. It also carries Emil Kowalski's UI skills from [emilkowalski/skills](https://github.com/emilkowalski/skills), and a design checklist adapted from [pbakaus/impeccable](https://github.com/pbakaus/impeccable). FORK.md explains how to pull updates from pstack and Emil.
+[pstack](https://github.com/backnotprop/pstack) with this fork's edits. It also carries Emil Kowalski's UI skills from [emilkowalski/skills](https://github.com/emilkowalski/skills), Benji Taylor's `stageshow` from [benjitaylor/skills](https://github.com/benjitaylor/skills), and a design checklist adapted from [pbakaus/impeccable](https://github.com/pbakaus/impeccable). FORK.md explains how to pull updates from pstack and the vendored upstreams.
 
 ```bash
 npx skills add gdorsi/my-pstack

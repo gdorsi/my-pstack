@@ -1,6 +1,6 @@
 # Sync this fork
 
-my-pstack is a fork of [backnotprop/pstack](https://github.com/backnotprop/pstack). backnotprop/pstack mirrors Cursor's pstack and rewrites its Cursor-only instructions so they work in Claude Code, Codex, and other agents. A merge from backnotprop/pstack brings in both. The fork also carries 17 UI skills copied from [emilkowalski/skills](https://github.com/emilkowalski/skills), pinned to one commit in `vendor/emilkowalski-skills/manifest`.
+my-pstack is a fork of [backnotprop/pstack](https://github.com/backnotprop/pstack). backnotprop/pstack mirrors Cursor's pstack and rewrites its Cursor-only instructions so they work in Claude Code, Codex, and other agents. A merge from backnotprop/pstack brings in both. The fork also carries Emil Kowalski's UI skills from [emilkowalski/skills](https://github.com/emilkowalski/skills) and Benji Taylor's `stageshow` from [benjitaylor/skills](https://github.com/benjitaylor/skills), each pinned to one commit in `vendor/<upstream>/manifest`.
 
 This fork edits only these pstack files. Keep the list current, because a sync conflict can only come from a file on it.
 
@@ -33,21 +33,38 @@ MIRROR.md and SYNC-LOG.md belong to backnotprop/pstack. Leave them unchanged. ba
 3. If the merge conflicts, keep backnotprop's change and reapply this fork's edit on top.
 4. Open a PR and land it with a merge commit. A squash or rebase merge drops pstack's history, and the next `git merge pstack/main` then conflicts in every file.
 
-## Update Emil Kowalski's skills
+## Update vendored skills
 
-Emil's skills live in `skills/` next to pstack's. `vendor/emilkowalski-skills/manifest` pins the upstream commit and lists the skills.
+Vendored skills live in `skills/` next to pstack's. Each upstream has a `vendor/<upstream>/manifest` that pins one commit and lists the skills to copy. `vendor/sync.sh` reads every manifest and knows no upstream by name.
 
 1. From the repo root, run the sync.
 
 	```bash
-	vendor/emilkowalski-skills/sync.sh --update
+	vendor/sync.sh                               # resync every upstream at its pinned commit
+	vendor/sync.sh --update                      # move every upstream to its latest commit
+	vendor/sync.sh --update benjitaylor-skills   # move one upstream, resync the rest at their pins
 	```
 
-2. Review the diff. The script rewrites the `commit` line and the copied skills, and it fails on a broken relative link or a reference to a skill the manifest leaves out.
-3. Open a PR.
+2. Review the diff. The script rewrites the `commit` line and the copied skills. It fails on a broken relative link, a reference to a skill the manifest leaves out, a skill name that two manifests list, and a skill with no license.
+3. After an update, read the diff under `skills/stageshow/scripts/`. Agents run those scripts on your machine.
+4. Open a PR.
+
+A manifest has these lines. A line that starts with `#` is a comment.
+
+| Key | Count | Meaning |
+|---|---|---|
+| `repo` | 1 | Git URL of the upstream |
+| `commit` | 1 | Full 40-character sha. `--update` rewrites it |
+| `path` | 1 | Directory in the upstream that holds the skill folders. `skills` for Emil, `.` for Benji |
+| `license` | 0 or 1 | File in the upstream that the sync copies to `vendor/<upstream>/LICENSE`. Leave it out when each skill ships its own `LICENSE` |
+| `skill` | 1 or more | A skill folder under `path`. The sync copies it to `skills/<name>/` |
+
+The sync prints `unlicensed: skills/<name>` for a skill that has neither a `license` line in its manifest nor its own `LICENSE`.
 
 The sync sets `disable-model-invocation: true` on every vendored skill, so each one loads only from `/name` or a pstack route. The sync fails if a skill lacks the line.
 
 Never edit a vendored skill by hand. The next sync overwrites it.
 
-To add or drop a skill, edit `manifest`. Delete a dropped skill's directory by hand, then rerun `vendor/emilkowalski-skills/sync.sh`. Run it without `--update` to stay on the pinned commit.
+To add or drop a skill, edit its `manifest`. Delete a dropped skill's directory by hand, then rerun `vendor/sync.sh`. Run it without `--update` to stay on the pinned commit. To add an upstream, create `vendor/<owner>-<repo>/manifest` and run `vendor/sync.sh`. Nothing else registers it.
+
+`skills/stageshow/` ships `package.json` and its lockfile but no `node_modules`. Run `npm install` in the installed `stageshow` folder before you use it. Don't run it in this repo, because the next sync deletes `node_modules` there.
