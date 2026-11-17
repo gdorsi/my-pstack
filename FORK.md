@@ -9,7 +9,7 @@ This fork edits only these pstack files. Keep the list current, because a sync c
 
 The fork also adds two files of its own next to pstack's.
 
-- `skills/poteto-mode/references/ui-craft.md` routes UI work to Emil's skills.
+- `skills/poteto-mode/references/ui-craft.md` routes UI work to Emil's skills and stageshow.
 - `skills/poteto-mode/references/design-checklist.md` holds design rules adapted from [pbakaus/impeccable](https://github.com/pbakaus/impeccable). `vendor/impeccable/LICENSE` is impeccable's Apache-2.0 license. No script syncs this file. Edit it by hand, and keep a rule only when agents miss it without the file.
 
 MIRROR.md and SYNC-LOG.md belong to backnotprop/pstack. Leave them unchanged. backnotprop edits SYNC-LOG.md almost every day, so a local edit conflicts with nearly every sync.
