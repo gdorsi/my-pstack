@@ -63,6 +63,7 @@ These skills don't load on their own. Type `/animate`, `/stageshow`, or another 
 
 - It adds 17 of Emil Kowalski's skills and Benji Taylor's `stageshow`. A manifest in `vendor/` pins each upstream to one commit.
 - `poteto-mode` sends UI work through `ui-craft.md` and `design-checklist.md`.
+- Three ideas from Matt Pocock's `codebase-design` skill go into pstack's principles and `architect`: what a test runs in place of each kind of dependency, the deletion test for a layer, and what counts as a module's interface.
 - It deletes the Cursor plugin manifests, the `poteto-agent` and `comment-sicko` subagent definitions, the logo and README images, and the Cursor-only `benny` automation pack. Without a registered `poteto-agent`, `poteto-mode` spawns a general subagent and tells it to read `poteto-mode` first. `/no-comments` carries its own copy of the Comment Sicko prompt.
 
 [FORK.md](FORK.md) explains how to pull updates from pstack and the vendored upstreams.
@@ -73,6 +74,7 @@ These skills don't load on their own. Type `/animate`, `/stageshow`, or another 
 - [backnotprop/pstack](https://github.com/backnotprop/pstack) adapts pstack for agents other than Cursor.
 - Emil Kowalski's skills come from [emilkowalski/skills](https://github.com/emilkowalski/skills), MIT. See [`vendor/emilkowalski-skills/LICENSE`](vendor/emilkowalski-skills/LICENSE).
 - `stageshow` comes from Benji Taylor's [benjitaylor/skills](https://github.com/benjitaylor/skills), MIT. See [`skills/stageshow/LICENSE`](skills/stageshow/LICENSE). Its MIT license doesn't cover the app icons it bundles. [`NOTICE.md`](skills/stageshow/NOTICE.md) has the details.
+- Edits to `principle-test-behavior-not-implementation`, `principle-minimize-reader-load`, and `architect` adapt ideas from Matt Pocock's [codebase-design](https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design) skill, MIT. See [`vendor/mattpocock-skills/LICENSE`](vendor/mattpocock-skills/LICENSE).
 - `design-checklist.md` adapts rules from Paul Bakaus's [impeccable](https://github.com/pbakaus/impeccable), Apache-2.0. See [`vendor/impeccable/LICENSE`](vendor/impeccable/LICENSE).
 
 Everything else is under the MIT license in [LICENSE](LICENSE).
