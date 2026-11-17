@@ -5,6 +5,9 @@ my-pstack is a fork of [backnotprop/pstack](https://github.com/backnotprop/pstac
 This fork edits only these pstack files. Keep the list current, because a sync conflict can only come from a file on it.
 
 - `README.md`: the block between `my-pstack:start` and `my-pstack:end`.
+- `skills/poteto-mode/SKILL.md`: one trigger line that sends UI work to `references/ui-craft.md`.
+
+The fork also adds `skills/poteto-mode/references/ui-craft.md`, which routes UI work to Emil's skills.
 
 MIRROR.md and SYNC-LOG.md belong to backnotprop/pstack. Leave them unchanged. backnotprop edits SYNC-LOG.md almost every day, so a local edit conflicts with nearly every sync.
 
