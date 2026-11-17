@@ -18,3 +18,10 @@ Keep a test that catches the first edit and survives the second. Rewrite or dele
 The contract decides, not the shape of the assertion. When "an empty cart never charges" is the promise, an assertion that the payment client got no call is behavior. Pair it with a case where the charge happens, so that the test shows it can see a call. The payload that a mocked external service receives is behavior, because that service observes it. A call to an internal helper is implementation, because no user can see it. An empty list is the exact answer when no record matches, and a hollow check when the test only needs some result. An exact error message pins wording that no caller reads. The error type that callers branch on is the contract.
 
 A test can pin an invariant instead of a call, such as a key that must exist in two tables or a compile-time type check. The invariant is the behavior.
+
+Run every dependency that the test can run. The kind of dependency decides what the test uses in its place:
+
+- **In-process code** (pure computation, in-memory state): use the real code, with no seam and no test double. When two in-process modules are tested apart with a double between them, test them together through the interface their callers use.
+- **A dependency with a local stand-in** (PGLite or a container for Postgres, an in-memory filesystem): run the stand-in in the suite. Keep the seam inside the module, with no port on its interface.
+- **A remote service you own:** put a port at the seam. Production passes a network adapter, and tests pass an in-memory adapter.
+- **A third-party service** (payments, email, SMS): take it through a port, and give tests a mock adapter. Assert the payload it receives, as above.

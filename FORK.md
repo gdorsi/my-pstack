@@ -9,6 +9,12 @@ This fork edits only these pstack files. Keep the list current, because a sync c
 - `skills/poteto-mode/SKILL.md`: one trigger line that sends UI work to `references/ui-craft.md`.
 - `docs/guide/05-build-and-clean.md`: the Comment Sicko link points to the copy in `skills/no-comments/references/`.
 - `docs/guide/07-overnight.md`: the paragraph about the `benny` automation pack is gone.
+- `skills/principle-test-behavior-not-implementation/SKILL.md`: the closing list of what a test runs in place of each kind of dependency.
+- `skills/principle-minimize-reader-load/SKILL.md`: the "Run the deletion test" bullet.
+- `skills/architect/references/design-red-flags.md`: two sentences in "Shallow module" on what counts as interface surface.
+- `skills/architect/references/runner-prompt.md`: the bullet that classifies each dependency.
+
+The last four edits adapt ideas from Matt Pocock's [codebase-design](https://github.com/mattpocock/skills/tree/5863806dd4e15c63174bee4e7515a4256792ecfa/skills/engineering/codebase-design) skill. `vendor/mattpocock-skills/LICENSE` is its MIT license. No script syncs these edits. Compare against that commit by hand.
 
 The fork also deletes these pstack paths. No skill reads them.
 
