@@ -43,6 +43,8 @@ Emil's skills live in `skills/` next to pstack's. `vendor/emilkowalski-skills/ma
 2. Review the diff. The script rewrites the `commit` line and the copied skills, and it fails on a broken relative link or a reference to a skill the manifest leaves out.
 3. Open a PR.
 
+The sync sets `disable-model-invocation: true` on every vendored skill, so each one loads only from `/name` or a pstack route. The sync fails if a skill lacks the line.
+
 Never edit a vendored skill by hand. The next sync overwrites it.
 
 To add or drop a skill, edit `manifest`. Delete a dropped skill's directory by hand, then rerun `vendor/emilkowalski-skills/sync.sh`. Run it without `--update` to stay on the pinned commit.
