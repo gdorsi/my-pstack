@@ -2,10 +2,20 @@
 
 my-pstack is a fork of [backnotprop/pstack](https://github.com/backnotprop/pstack). backnotprop/pstack mirrors Cursor's pstack and rewrites its Cursor-only instructions so they work in Claude Code, Codex, and other agents. A merge from backnotprop/pstack brings in both. The fork also carries Emil Kowalski's UI skills from [emilkowalski/skills](https://github.com/emilkowalski/skills) and Benji Taylor's `stageshow` from [benjitaylor/skills](https://github.com/benjitaylor/skills), each pinned to one commit in `vendor/<upstream>/manifest`.
 
-This fork edits only these pstack files. Keep the list current, because a sync conflict can only come from a file on it.
+This fork edits only these pstack files. Keep the list current, because a sync conflict can only come from a file on it or from a deleted path below.
 
-- `README.md`: the block between `my-pstack:start` and `my-pstack:end`.
+- `README.md`: the whole file. The fork keeps its own version on every sync.
+- `LICENSE`: a second copyright line for this fork's changes.
 - `skills/poteto-mode/SKILL.md`: one trigger line that sends UI work to `references/ui-craft.md`.
+- `docs/guide/05-build-and-clean.md`: the Comment Sicko link points to the copy in `skills/no-comments/references/`.
+- `docs/guide/07-overnight.md`: the paragraph about the `benny` automation pack is gone.
+
+The fork also deletes these pstack paths. No skill reads them.
+
+- `.cursor-plugin/` and `plugin.json`: the Cursor plugin manifests.
+- `agents/`: the `poteto-agent` and `comment-sicko` subagent definitions. `poteto-mode` spawns a general subagent where `poteto-agent` isn't registered, and `/no-comments` carries its own copy of Comment Sicko.
+- `assets/` and `mirror-assets/`: the logo and the images in pstack's README.
+- `automations/`: the `benny` automation pack, which runs only on Cursor Automations.
 
 The fork also adds two files of its own next to pstack's.
 
@@ -22,16 +32,23 @@ MIRROR.md and SYNC-LOG.md belong to backnotprop/pstack. Leave them unchanged. ba
 	git remote add pstack https://github.com/backnotprop/pstack.git
 	```
 
-2. Merge it on a new branch:
+2. Merge it on a new branch, without committing yet:
 
 	```bash
 	git fetch pstack
 	git switch -c sync-pstack origin/main
-	git merge pstack/main
+	git merge --no-commit pstack/main
 	```
 
-3. If the merge conflicts, keep backnotprop's change and reapply this fork's edit on top.
-4. Open a PR and land it with a merge commit. A squash or rebase merge drops pstack's history, and the next `git merge pstack/main` then conflicts in every file.
+3. Restore this fork's README and delete anything the merge brought back under a deleted path. These commands also resolve conflicts on those paths, and they change nothing when the merge left them alone.
+
+	```bash
+	git checkout HEAD -- README.md
+	git rm -r -q --ignore-unmatch .cursor-plugin agents assets automations mirror-assets plugin.json
+	```
+
+4. If another file conflicts, keep backnotprop's change and reapply this fork's edit on top. Then run `git commit`.
+5. Open a PR and land it with a merge commit. A squash or rebase merge drops pstack's history, and the next `git merge pstack/main` then conflicts in every file.
 
 ## Update vendored skills
 
