@@ -3,7 +3,7 @@
 
 # my-pstack
 
-[pstack](https://github.com/backnotprop/pstack) with this fork's edits. FORK.md explains how to pull pstack updates.
+[pstack](https://github.com/backnotprop/pstack) with this fork's edits. It also carries Emil Kowalski's UI skills from [emilkowalski/skills](https://github.com/emilkowalski/skills). FORK.md explains how to pull updates from both.
 
 ```bash
 npx skills add gdorsi/my-pstack
